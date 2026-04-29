@@ -150,12 +150,16 @@ int main() {
             Packet rpc_pkt = {MSG_RPC_REQ, "", ""};
             strcpy(rpc_pkt.sender, my_name);
 
-            if (cmd == 1) strcpy(rpc_pkt.content, "RPC_GET_USERS");
-            else if (cmd == 2) strcpy(rpc_pkt.content, "RPC_GET_UPTIME");
-            else if (cmd == 3) strcpy(rpc_pkt.content, "RPC_SHUTDOWN");
-            else if (cmd == 4) handle_sigint(0);
+		if (cmd == 1) strcpy(rpc_pkt.content, "RPC_GET_USERS");
+		else if (cmd == 2) strcpy(rpc_pkt.content, "RPC_GET_UPTIME");
+		else if (cmd == 3) strcpy(rpc_pkt.content, "RPC_SHUTDOWN");
+		else if (cmd == 4) handle_sigint(0);
+		else {
+   		printf("[System] Invalid command.\n");
+    		continue;
+		}
 
-            send(sock, &rpc_pkt, sizeof(Packet), 0);
+		send(sock, &rpc_pkt, sizeof(Packet), 0);
         }
     }
 

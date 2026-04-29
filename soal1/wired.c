@@ -134,33 +134,33 @@ void *handle_client(void *arg) {
             // Sebarkan ke yang lain
             broadcast_message(&pkt, client_socket);
         }
-        else if (pkt.type == MSG_RPC_REQ && clients[client_index].is_admin) {
-            // RPC Command untuk Admin
-            write_log("Admin", pkt.content); // Misal: [RPC_GET_USERS]
-            Packet res = {MSG_RPC_RES, "System", ""};
-            
-            if (strcmp(pkt.content, "RPC_GET_USERS") == 0) {
-                int count = 0;
-                pthread_mutex_lock(&clients_mutex);
-                for(int i=0; i<MAX_CLIENTS; i++) {
-                    // Cek aktif dan BUKAN admin
-                    if(clients[i].is_active && !clients[i].is_admin) count++;
-                }
-                pthread_mutex_unlock(&clients_mutex);
-                sprintf(res.content, "Active NAVI Units: %d\n", count);
-                send(client_socket, &res, sizeof(Packet), 0);
-            } 
-            else if (strcmp(pkt.content, "RPC_GET_UPTIME") == 0) {
-                time_t now = time(NULL);
-                int diff = (int)(now - server_start_time);
-                sprintf(res.content, "Server Uptime: %d seconds\n", diff);
-                send(client_socket, &res, sizeof(Packet), 0);
-            }
-            else if (strcmp(pkt.content, "RPC_SHUTDOWN") == 0) {
-                write_log("System", "EMERGENCY SHUTDOWN INITIATED");
-                printf("[System] Emergency Shutdown requested by Admin.\n");
-                exit(0); // Matikan server seketika
-            }
+	else if (pkt.type == MSG_RPC_REQ && clients[client_index].is_admin) {
+    Packet res = {MSG_RPC_RES, "System", ""};
+
+    if (strcmp(pkt.content, "RPC_GET_USERS") == 0) {
+        write_log("Admin", pkt.content);  // ← tetap ada
+        int count = 0;
+        pthread_mutex_lock(&clients_mutex);
+        for(int i=0; i<MAX_CLIENTS; i++) {
+            if(clients[i].is_active && !clients[i].is_admin) count++;
+        }
+        pthread_mutex_unlock(&clients_mutex);
+        sprintf(res.content, "Active NAVI Units: %d\n", count);
+        send(client_socket, &res, sizeof(Packet), 0);
+    }
+    else if (strcmp(pkt.content, "RPC_GET_UPTIME") == 0) {
+        write_log("Admin", pkt.content);  // ← tetap ada
+        time_t now = time(NULL);
+        int diff = (int)(now - server_start_time);
+        sprintf(res.content, "Server Uptime: %d seconds\n", diff);
+        send(client_socket, &res, sizeof(Packet), 0);
+    }
+    else if (strcmp(pkt.content, "RPC_SHUTDOWN") == 0) {
+        write_log("Admin", pkt.content);  // ← tetap ada
+        write_log("System", "EMERGENCY SHUTDOWN INITIATED");
+        printf("[System] Emergency Shutdown requested by Admin.\n");
+        exit(0);
+    }
         }
     }
 
