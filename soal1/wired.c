@@ -122,7 +122,7 @@ void *handle_client(void *arg) {
         } 
         else if (pkt.type == MSG_CHAT) {
             //user send pesan, tulis Log chatnya
-            char log_msg[120];
+            char log_msg[2048];
             sprintf(log_msg, "[%s]: %s", pkt.sender, pkt.content);
             write_log("User", log_msg);
             

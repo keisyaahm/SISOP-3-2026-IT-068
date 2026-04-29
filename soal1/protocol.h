@@ -12,7 +12,8 @@ MSG_LOGIN, //pertama kirim
 MSG_CHAT, //psn biasa
 MSG_EXIT, //mau keluar
 MSG_RPC_REQ, //req dari admin ke server
-MSG_RPC_RES //server bls req admin
+MSG_RPC_RES, //server bls req admin
+MSG_ERROR
 } MsgType;
 
 //Struktur paket data yg bakal dikirim lewat Socket
