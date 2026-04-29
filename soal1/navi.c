@@ -18,7 +18,8 @@ void handle_sigint(int sig) {
     send(sock, &pkt, sizeof(Packet), 0);
     printf("\n[System] Disconnecting from The Wired...\n");
     close(sock);
-    exit(0);
+    
+    _exit(0);
 }
 
 // Thread Khusus Menerima Pesan Asinkron (dari Server)
@@ -27,22 +28,34 @@ void *receive_handler(void *arg) {
     while (recv(sock, &pkt, sizeof(Packet), 0) > 0) {
         if (pkt.type == MSG_CHAT) {
             if (strcmp(pkt.sender, "System") == 0) {
-                printf("%s", pkt.content);
+                // Sapaan awal dari sistem
+                printf("%s> ", pkt.content);
+                fflush(stdout);
             } else {
                 // Tampilan broadcast dari user lain
                 printf("\n[%s]: %s\n> ", pkt.sender, pkt.content);
-                fflush(stdout); // Paksa layar diperbarui
+                fflush(stdout); 
             }
-        }
-        else if (pkt.type == MSG_ERROR) {
+        } 
+	else if (pkt.type == MSG_ERROR) {
             printf("[System] %s", pkt.content);
-            exit(0); // Dimatikan karena error login
-        }
+            fflush(stdout); // Paksa teks error tercetak ke layar saat ini juga
+            
+            _exit(0); // [REVISI] Tembak mati program seketika tanpa memicu Deadlock I/O
+        }	
+
         else if (pkt.type == MSG_RPC_RES) {
-            printf("\n%s> ", pkt.content);
+            printf("\n%s\n> ", pkt.content);
             fflush(stdout);
         }
     }
+
+    // [REVISI]
+    // Kalau loop while di atas berhenti, artinya recv() = 0 (Koneksi dari Server Terputus!)
+    printf("\n[System] Connection lost. The Wired has been shut down.\n");
+    fflush(stdout);
+    _exit(0);
+
     return NULL;
 }
 
@@ -99,24 +112,28 @@ int main() {
     pthread_t recv_thread;
     pthread_create(&recv_thread, NULL, receive_handler, NULL);
 
-    //MAIN LOOP: Loop Utama Main Thread: Menunggu ketikan keyboard
+    // MAIN LOOP: Loop Utama Main Thread
     char buffer[BUFFER_SIZE];
     while (1) {
         if (!is_admin) {
-            // Mode Chat Normal
-            printf("> ");
+            // Mode Chat Normal (SUDAH TIDAK ADA printf("> ") DI SINI)
             fgets(buffer, BUFFER_SIZE, stdin);
             buffer[strcspn(buffer, "\n")] = 0;
 
             if (strcmp(buffer, "/exit") == 0) {
-                handle_sigint(0); // Trigger fungsi exit
+                handle_sigint(0); 
             } else if (strlen(buffer) > 0) {
                 Packet chat_pkt = {MSG_CHAT, "", ""};
                 strcpy(chat_pkt.sender, my_name);
                 strcpy(chat_pkt.content, buffer);
                 send(sock, &chat_pkt, sizeof(Packet), 0);
+                
+                // Print ulang prompt > SETELAH user ngirim chat
+                printf("> ");
+                fflush(stdout);
             }
         } else {
+
             // Mode Admin (The Knights Console)
             sleep(1); // Kasih nafas dikit biar UI menu nggak ketimpa pesan masuk
             printf("\n=== THE KNIGHTS CONSOLE ===\n");

@@ -97,9 +97,14 @@ void *handle_client(void *arg) {
             }
             pthread_mutex_unlock(&clients_mutex);
 
-            // Jika sukses, kirim sambutan
-            Packet res = {MSG_CHAT, "System", "--- Welcome to The Wired ---\n"};
-            send(client_socket, &res, sizeof(Packet), 0);
+	    // [REVISI] Jika sukses, kirim sambutan HANYA JIKA BUKAN ADMIN
+            if (!clients[client_index].is_admin) {
+                char welcome_msg[150];
+                sprintf(welcome_msg, "--- Welcome to The Wired, %s ---\n", pkt.sender);
+                Packet res = {MSG_CHAT, "System", ""};
+                strcpy(res.content, welcome_msg);
+                send(client_socket, &res, sizeof(Packet), 0);
+            }
 
             // Log dan Broadcast kalau ada user masuk
             char log_msg[100];
