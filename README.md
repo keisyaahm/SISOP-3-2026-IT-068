@@ -3,7 +3,7 @@
 
 **Nama:** Keisya Halimah Mulia  
 **NRP:** 5027251068  
-**Kelas:** A / Teknologi Informasi  
+**Kelas:** A
 **Repository:** [SISOP-3-2026-IT-068](https://github.com/keisyaahm/SISOP-3-2026-IT-068)
 
 ---
