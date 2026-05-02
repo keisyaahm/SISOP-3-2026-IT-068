@@ -65,6 +65,22 @@ git add .
 git commit -m "clean: remove binaries, add gitignore"
 git push -u origin main
 ```
+Struktur yang di
+
+```
+SISOP-3-2026-IT-068/
+├── soal1/
+│   ├── .gitignore
+│   ├── navi.c
+│   ├── protocol.h
+│   └── wired.c
+└── soal2/
+    ├── .gitignore
+    ├── arena.h
+    ├── eternal.c
+    ├── orion.c
+    └── Makefile
+```
 
 Struktur akhir repository yang masuk ke GitHub:
 
