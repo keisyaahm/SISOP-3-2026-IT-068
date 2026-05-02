@@ -4,7 +4,6 @@
 **Nama:** Keisya Halimah Mulia  
 **NRP:** 5027251068  
 **Kelas:** A
-**Repository:** [SISOP-3-2026-IT-068](https://github.com/keisyaahm/SISOP-3-2026-IT-068)
 
 ---
 
@@ -65,7 +64,8 @@ git add .
 git commit -m "clean: remove binaries, add gitignore"
 git push -u origin main
 ```
-Struktur yang di
+Struktur yang di linux
+![strktur repositori](./assetss/tree.png)
 
 ```
 SISOP-3-2026-IT-068/
@@ -383,70 +383,9 @@ gcc -pthread -o navi navi.c
 
 ### Output dan Hasil Soal 1
 
-**Terminal Server (`wired`) saat berjalan normal:**
-```
-=== THE WIRED IS ONLINE ===
-[System] Emergency Shutdown requested by Admin.
-```
+![output](./assetss/SO1.png)
 
-**Terminal Client biasa (`navi`) saat login:**
-```
-Enter your name: alice
---- Welcome to The Wired, alice ---
-> 
-```
-
-**Saat nama duplikat:**
-```
-Enter your name: alice
-[System] The identity is already synchronized in The Wired.
-```
-
-**Saat menerima pesan dari user lain:**
-```
-> 
-[lain]: hallo alice
-> 
-```
-
-**Terminal Admin (`The Knights`):**
-```
-Enter your name: The Knights
-Enter Password: protocol7
-
-[System] Authentication Successful. Granted Admin privileges.
-
-=== THE KNIGHTS CONSOLE ===
-1. Check Active Entities (Users)
-2. Check Server Uptime
-3. Execute Emergency Shutdown
-4. Disconnect
-Command >> 1
-
-Active NAVI Units: 2
-
-Command >> 2
-
-Server Uptime: 80 seconds
-
-Command >> 3
-[System] Connection lost. The Wired has been shut down.
-```
-
-**Isi `history.log` yang dihasilkan:**
-```
-[2026-04-29 18:22:45] [System] [SERVER ONLINE]
-[2026-04-29 18:22:53] [System] [User 'alice' connected]
-[2026-04-29 18:23:11] [System] [User 'lain' connected]
-[2026-04-29 18:23:36] [System] [User 'The Knights' connected]
-[2026-04-29 18:25:29] [User] [[lain]: hallo alice]
-[2026-04-29 18:26:49] [User] [[alice]: halo lain]
-[2026-04-29 18:26:56] [Admin] [RPC_GET_USERS]
-[2026-04-29 18:27:04] [Admin] [RPC_GET_USERS]
-[2026-04-29 18:27:07] [Admin] [RPC_GET_UPTIME]
-[2026-04-29 18:27:15] [Admin] [RPC_SHUTDOWN]
-[2026-04-29 18:27:15] [System] [EMERGENCY SHUTDOWN INITIATED]
-```
+user juga tidak akan bisa login dengan akun yang sama
 
 ### Error dan Solusi Soal 1
 
@@ -489,19 +428,6 @@ exit(0);
 
 // Sesudah:
 _exit(0); // paksa keluar tanpa trigger cleanup I/O
-```
-
-**Error 3: Client freeze saat server dimatikan**
-
-Masalah: Ketika admin mengeksekusi Emergency Shutdown, semua client lain *freeze* karena `fgets()` di main thread terus menunggu input, tidak tahu bahwa server sudah mati.
-
-Solusi: Deteksi kondisi `recv() <= 0` (artinya koneksi terputus) di receiver thread, lalu paksa keluar dengan `_exit(0)`.
-
-```c
-// Di akhir loop while recv() di receive_handler:
-printf("\n[System] Connection lost. The Wired has been shut down.\n");
-fflush(stdout);
-_exit(0); // paksa keluar saat server mati
 ```
 
 ---
@@ -901,68 +827,21 @@ Orion is ready (PID: 8079). DB Loaded: 2 warriors.
 ```
 
 **Eternal (client) saat register dan login:**
-```
-=== ETERION ===
-1. Register
-2. Login
-3. Exit
-Choice: 1
-Username: erine
-Password: 123
-Account created!
 
-Choice: 2
-Username: erine
-Password: 123
-
-┌────────────────────────────────────────┐
-│                PROFILE                 │
-├────────────────────────────────────────┤
-│ Name : erine           Lvl : 1        │
-│ Gold : 150             XP  : 0        │
-└────────────────────────────────────────┘
-1. Battle
-2. Armory
-3. History
-4. Logout
-Choice:
-```
+![output](./assetss/SO2.png)
 
 **Saat login dengan akun yang sudah aktif:**
-```
-Login gagal!
-```
 
-**Saat Battle vs Bot (menunggu 35 detik):**
-```
-Searching for an opponent... [35 s]
-```
+![output](./assetss/SO3.png)
 
 **Tampilan Arena saat Battle:**
-```
-=== ARENA ===
-erine           HP: 100   / 100
-       VS
-Wild Beast (Bot) HP: 100   / 100
 
-Combat Log:
-> erine hit for 10 damage!
-> Wild Beast hit for 15 damage!
-> erine hit for 10 damage!
-
-Press 'a' to Attack, 'u' to Ultimate
-```
+![output](./assetss/SO4.png)
 
 **Setelah Battle selesai:**
-```
-=== VICTORY ===
-Battle ended. Press [ENTER] to continue...
-```
-atau
-```
-=== DEFEAT ===
-Battle ended. Press [ENTER] to continue...
-```
+
+![output](./assetss/SO5.png)
+
 
 **Contoh perhitungan stats setelah battle:**
 
@@ -982,24 +861,9 @@ Battle berikutnya:
 - Ultimate: 16 × 3 = **48**
 - HP: 100 + (50/10) = **105**
 
-**Match History:**
-```
---- MATCH HISTORY ---
-Time    Opponent          Res     XP
-20:49   oline             WIN     +50 XP
-20:51   oline             LOSS    +15 XP
-```
 
-**Saat orion di-Ctrl+C (save data):**
-```
-[Orion] Shutting down. Saving universe...
-[Orion] Universe saved successfully to eterion.dat!
-```
-
-**Saat orion dijalankan ulang (load data):**
-```
-Orion is ready (PID: 5754). DB Loaded: 2 warriors.
-```
+**Saat orion di-Ctrl+C (save data) dan dijalankan ulang (load data)**
+![output](./assetss/SO6.png)
 
 ### Error dan Solusi Soal 2
 
@@ -1100,5 +964,3 @@ make clear_ipc
 ```
 
 ---
-
-*Laporan ini dibuat berdasarkan seluruh proses pengerjaan Praktikum Sistem Operasi Modul 3, mencakup implementasi Thread, IPC (Shared Memory, Message Queue, Semaphore), dan Socket TCP/RPC dalam bahasa C di lingkungan Linux Ubuntu (WSL).*
