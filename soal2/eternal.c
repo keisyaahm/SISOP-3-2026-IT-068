@@ -22,13 +22,32 @@ void add_combat_log(int a_idx, char* msg) {
 
 // Thread Khusus Render UI Battle (ANTI KEDAP-KEDIP)
 void *battle_display_thread(void *arg) {
-    printf("\033[H\033[J"); // Clear bersih sekali di awal
+    printf("\033[H\033[J");
     while(in_battle) {
-        printf("\033[H"); // Hanya pindah kursor ke atas, menimpa teks lama
+        printf("\033[H");
         printf("=== ARENA ===                                      \n");
-        printf("%-15s HP: %-5d / %-5d           \n", db->arenas[current_arena_idx].p1, db->arenas[current_arena_idx].p1_hp, db->arenas[current_arena_idx].p1_max);
+        printf("%-15s HP: %-5d / %-5d           \n",
+               db->arenas[current_arena_idx].p1,
+               db->arenas[current_arena_idx].p1_hp,
+               db->arenas[current_arena_idx].p1_max);
         printf("       VS                                          \n");
-        printf("%-15s HP: %-5d / %-5d           \n\n", db->arenas[current_arena_idx].p2, db->arenas[current_arena_idx].p2_hp, db->arenas[current_arena_idx].p2_max);
+        printf("%-15s HP: %-5d / %-5d           \n\n",
+               db->arenas[current_arena_idx].p2,
+               db->arenas[current_arena_idx].p2_hp,
+               db->arenas[current_arena_idx].p2_max);
+
+        // Tampilkan info senjata yang dipakai
+        int wpn = db->users[my_id_idx].highest_dmg_weapon;
+        char wpn_name[20];
+        if      (wpn >= 150) strcpy(wpn_name, "God Slayer");
+        else if (wpn >= 60)  strcpy(wpn_name, "Demon Blade");
+        else if (wpn >= 30)  strcpy(wpn_name, "Steel Axe");
+        else if (wpn >= 15)  strcpy(wpn_name, "Iron Sword");
+        else if (wpn >= 5)   strcpy(wpn_name, "Wood Sword");
+        else                 strcpy(wpn_name, "None");
+
+        printf("Weapon: %-15s | DMG Bonus: +%-3d           \n\n", wpn_name, wpn);
+
         printf("Combat Log:                                        \n");
         for(int i=0; i<5; i++) {
             if(strlen(db->arenas[current_arena_idx].logs[i]) > 0)
@@ -39,7 +58,7 @@ void *battle_display_thread(void *arg) {
         printf("\nCD: Atk(1s) | Ult(Ready if weapon>0)               \n");
         printf("Press 'a' to Attack, 'u' to Ultimate               \n");
         fflush(stdout);
-        usleep(200000); 
+        usleep(200000);
     }
     return NULL;
 }
