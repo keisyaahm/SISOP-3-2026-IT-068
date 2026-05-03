@@ -987,8 +987,7 @@ otomatis lebih besar setelah beli senjata karena formula:
 Ultimate (`u`) mengalikan total damage dengan 3, hanya bisa dipakai jika
 sudah memiliki senjata.
 
-[screenshot arena dengan info senjata]
-[screenshot battle dengan damage berbeda antara yang punya senjata dan tidak]
-[screenshot ulti berhasil]
+![output](./assetss/SOr4.png)
+![output](./assetss/SOr3.png)
 
 ---
