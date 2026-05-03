@@ -13,7 +13,7 @@
 - [Soal 1: Present Day, Present Time (The Wired)](#soal-1-present-day-present-time-the-wired)
   - [Deskripsi Soal 1](#deskripsi-soal-1)
   - [Struktur File Soal 1](#struktur-file-soal-1)
-  - [Penjelasan Kode Penting Soal 1](#penjelasan-kode--penting-soal-1)
+  - [Penjelasan Kode Penting Soal 1](#penjelasan-kode-penting-soal-1)
   - [Cara Kompilasi dan Menjalankan Soal 1](#cara-kompilasi-dan-menjalankan-soal-1)
   - [Output dan Hasil Soal 1](#output-dan-hasil-soal-1)
   - [Error dan Solusi Soal 1](#error-dan-solusi-soal-1)
@@ -24,6 +24,8 @@
   - [Cara Kompilasi dan Menjalankan Soal 2](#cara-kompilasi-dan-menjalankan-soal-2)
   - [Output dan Hasil Soal 2](#output-dan-hasil-soal-2)
   - [Error dan Solusi Soal 2](#error-dan-solusi-soal-2)
+- [Revisi](#revisi)
+  - [Revisi Soal 2](#revisi-soal-2)
 
 ---
 
@@ -965,11 +967,12 @@ make clear_ipc
 
 ---
 
-## Revisi
+
+# Revisi
 
 ### Revisi Soal 2
 
-**1. SS Orion tidak nyala → Eternal tidak menampilkan main menu dan akan where are u**
+**1. SS Orion tidak nyala = Eternal tidak menampilkan main menu dan akan where are u**
 
 ![output](./assetss/SOr1.png)
 
