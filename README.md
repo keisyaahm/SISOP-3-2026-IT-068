@@ -964,3 +964,31 @@ make clear_ipc
 ```
 
 ---
+
+## Revisi
+
+### Revisi Soal 2
+
+**1. SS Orion tidak nyala → Eternal tidak menampilkan main menu dan akan where are u**
+
+![output](./assetss/SOr1.png)
+
+**2. Login dengan akun yang sama di dua terminal harusnya tidak bisa**
+
+![output](./assetss/SOr2.png)
+
+**3. Info senjata di battle, damage lebih besar setelah beli senjata, bisa ulti**
+
+Ditambahkan tampilan nama senjata dan bonus damage di UI arena. Damage
+otomatis lebih besar setelah beli senjata karena formula:
+
+`Damage = 10 + (XP/50) + highest_dmg_weapon`
+
+Ultimate (`u`) mengalikan total damage dengan 3, hanya bisa dipakai jika
+sudah memiliki senjata.
+
+[screenshot arena dengan info senjata]
+[screenshot battle dengan damage berbeda antara yang punya senjata dan tidak]
+[screenshot ulti berhasil]
+
+---
