@@ -13,14 +13,14 @@
 - [Soal 1: Present Day, Present Time (The Wired)](#soal-1-present-day-present-time-the-wired)
   - [Deskripsi Soal 1](#deskripsi-soal-1)
   - [Struktur File Soal 1](#struktur-file-soal-1)
-  - [Penjelasan Kode Soal 1](#penjelasan-kode-soal-1)
+  - [Penjelasan Kode Penting Soal 1](#penjelasan-kode--penting-soal-1)
   - [Cara Kompilasi dan Menjalankan Soal 1](#cara-kompilasi-dan-menjalankan-soal-1)
   - [Output dan Hasil Soal 1](#output-dan-hasil-soal-1)
   - [Error dan Solusi Soal 1](#error-dan-solusi-soal-1)
 - [Soal 2: The Battle of Eterion](#soal-2-the-battle-of-eterion)
   - [Deskripsi Soal 2](#deskripsi-soal-2)
   - [Struktur File Soal 2](#struktur-file-soal-2)
-  - [Penjelasan Kode Soal 2](#penjelasan-kode-soal-2)
+  - [Penjelasan Kode Penting Soal 2](#penjelasan-kode-penting-soal-2)
   - [Cara Kompilasi dan Menjalankan Soal 2](#cara-kompilasi-dan-menjalankan-soal-2)
   - [Output dan Hasil Soal 2](#output-dan-hasil-soal-2)
   - [Error dan Solusi Soal 2](#error-dan-solusi-soal-2)
@@ -126,7 +126,7 @@ Membangun sistem chat jaringan bernama **The Wired** menggunakan pendekatan *Cli
 | `wired.c` | Server — menerima koneksi, mengelola client, broadcast pesan, RPC, logging |
 | `navi.c` | Client — input nama, kirim/terima pesan secara asinkron, mode admin |
 
-### Penjelasan Kode Soal 1
+### Penjelasan Kode Penting Soal 1
 
 #### A. `protocol.h` — Kontrak Komunikasi
 
@@ -476,7 +476,7 @@ Membangun simulasi game RPG *multiplayer real-time* berbasis **IPC (Inter-Proces
 | `eternal.c` | Client — UI game, matchmaking, battle loop, armory, history |
 | `Makefile` | Script otomatis compile dan bersihkan IPC |
 
-### Penjelasan Kode Soal 2
+### Penjelasan Kode Penting Soal 2
 
 #### A. `arena.h` — Pusat Definisi
 
